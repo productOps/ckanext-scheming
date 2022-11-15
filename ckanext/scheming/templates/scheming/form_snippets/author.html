@@ -1,17 +1,19 @@
 {% import 'macros/form.html' as form %}
 
-{% set date = g.date %}
+{% set user = g.userobj %}
 
-{% call form.input(
+{% set default_name = user.fullname if user.fullname else user.name %}
+
+{% call form.textarea(
     field.field_name,
     id='field-' + field.field_name,
     label=h.scheming_language_text(field.label),
     placeholder=h.scheming_language_text(field.form_placeholder),
-    value=date,
+    value=data[field.field_name],
+    default=default_name,
     error=errors[field.field_name],
-    classes=['control-medium'],
     attrs=dict({"class": "form-control"}, **(field.get('form_attrs', {}))),
-    is_required=h.scheming_field_required(field)
+    is_required=h.scheming_field_required(field),
     )
 %}
     {%- snippet 'scheming/form_snippets/help_text.html', field=field -%}

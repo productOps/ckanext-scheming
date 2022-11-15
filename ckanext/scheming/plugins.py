@@ -129,6 +129,7 @@ class _SchemingMixin(object):
         self._store_instance(self)
         self._add_template_directory(config)
         self._load_presets(config)
+        add_resource('fanstatic', 'scheming')
 
         self._is_fallback = p.toolkit.asbool(
             config.get(self.FALLBACK_OPTION, False)
@@ -324,6 +325,7 @@ class SchemingDatasetsPlugin(p.SingletonPlugin, DefaultDatasetForm,
         # are not empty.
         if not hasattr(c, 'licenses'):
             c.licenses = [('', '')] + model.Package.get_license_options()
+
 
 
 def expand_form_composite(data, fieldnames):

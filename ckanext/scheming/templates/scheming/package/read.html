@@ -1,5 +1,10 @@
 {% extends "package/read.html" %}
 
+{% block scripts %}
+  {{ super() }}
+  {% asset 'compass_theme/compass_theme' %}
+{% endblock scripts %}
+
 {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
 
 {% block package_notes %}
@@ -20,5 +25,22 @@
 
 {% block package_additional_info %}
   {% snippet "scheming/package/snippets/additional_info.html",
-    pkg_dict=pkg, dataset_type=dataset_type, schema=schema %}
+  pkg_dict=pkg, dataset_type=dataset_type, schema=schema %}
+  {% if dataset_type == 'auto_ingest' %}
+    <span class="metadata" data-module="compass_theme-metadata"
+        data-module-id="{{pkg.id}}">
+        <h3>{{ _('Metadata') }}</h3>
+        <table class="table table-striped table-bordered table-condensed">
+          <tbody>
+            <tr>
+              <th scope="row" class="dataset-label">{{ _("No Ingested Data Activity") }}</th>
+            </tr>
+          </tbody>
+        </table>
+    </span>
+    <span class="stages-view" data-module="compass_theme-render"
+          data-module-id="{{pkg.id}}">
+      {% snippet "scheming/package/snippets/empty_status.html" %}
+    </span>
+    {% endif %}
 {% endblock %}

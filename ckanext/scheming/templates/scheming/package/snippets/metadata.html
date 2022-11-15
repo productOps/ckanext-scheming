@@ -1,0 +1,34 @@
+{% set activity = h.most_recent_data_ingest(pkg_dict.id, True) %}
+
+<section class="metadata">
+    <h3>{{ _('Metadata') }}</h3>
+    <table class="table table-striped table-bordered table-condensed">
+      <tbody>
+        {% block package_additional_info %}
+          {% if not activity or (activity.data.stage == 'ingest' and activity.data.status == 'begin') %}
+            <tr>
+              <th scope="row" class="dataset-label">{{ _("No Ingested Data Activity") }}</th>
+            </tr>
+
+          {% else %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Ingested Rows") }}</th>
+            <td class="dataset-details">{{ _(h.humanize_int(activity.data.meta.rows)) }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Files") }}</th>
+            <td class="dataset-details">
+              {{ _(h.humanize_int(activity.data.meta.files))}}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Size") }}</th>
+            <td class="dataset-details">
+              {{ _(h.humanize_int(activity.data.meta.size, True)) }}
+            </td>
+          </tr>
+          {% endif %}
+        {% endblock %}
+      </tbody>
+    </table>
+  </section>

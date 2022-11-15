@@ -16,7 +16,6 @@
     might not be compatible with ckanext-scheming
     </p>
   {%- endif -%}
-
   {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
   {%- for field in schema.resource_fields -%}
     {%- if field.form_snippet is not none -%}
