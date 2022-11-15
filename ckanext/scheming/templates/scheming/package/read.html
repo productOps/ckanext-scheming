@@ -20,5 +20,22 @@
 
 {% block package_additional_info %}
   {% snippet "scheming/package/snippets/additional_info.html",
-    pkg_dict=pkg, dataset_type=dataset_type, schema=schema %}
+  pkg_dict=pkg, dataset_type=dataset_type, schema=schema %}
+  {% if dataset_type == 'auto_dataset' %}
+    {# <span class="metadata" data-module="compass_theme-metadata"
+        data-module-id="{{pkg.id}}">
+        <h3>{{ _('Metadata') }}</h3>
+        <table class="table table-striped table-bordered table-condensed">
+          <tbody>
+            <tr>
+              <th scope="row" class="dataset-label">{{ _("No Ingested Data Activity") }}</th>
+            </tr>
+          </tbody>
+        </table>
+    </span> #}
+    <span class="stages-view" style="margin: 0 auto;" data-module="productops-render_stages"
+          data-module-id="{{pkg.id}}">
+      {{h.productops_empty_ingest_stages()}}
+    </span>
+    {% endif %}
 {% endblock %}
