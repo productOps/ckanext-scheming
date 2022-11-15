@@ -36,13 +36,13 @@
                 {%- if 'humanize_entity_type' in h -%}
                   {{ h.humanize_entity_type('organization', group_type, 'update label') }}
                 {%- else -%}
-                  {{ _('Update Organization') }}
+                  {{ _('Update Access Group') }}
                 {%- endif -%}
               {%- else -%}
                 {%- if 'humanize_entity_type' in h -%}
                   {{ h.humanize_entity_type('organization', group_type, 'create label') }}
                 {%- else -%}
-                  {{ _('Create Organization') }}
+                  {{ _('Create Access Group') }}
                 {%- endif -%}
               {%- endif -%}
             {% endblock %}
