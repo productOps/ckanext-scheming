@@ -34,19 +34,6 @@
       }
     },
     {
-      "preset_name": "org_string_autocomplete",
-      "values": {
-        "validators": "ignore_missing",
-        "classes": ["control-full"],
-        "form_attrs": {
-          "data-module": "autocomplete",
-          "data-module-tags": "",
-          "data-module-source": "api/action/organization_autocomplete?q=?",
-          "class": ""
-        }
-      }
-    },
-    {
       "preset_name": "dataset_organization",
       "values": {
         "validators": "owner_org_validator unicode",
