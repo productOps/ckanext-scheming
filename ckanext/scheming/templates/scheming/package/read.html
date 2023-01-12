@@ -2,6 +2,8 @@
 
 {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
 
+{%- set activity_stream = h.get_package_activity_stream(pkg.id) -%}
+
 {% block package_notes %}
   {%- if not dataset_type -%}
     <p>
@@ -9,7 +11,11 @@
     might not be compatible with ckanext-scheming
     </p>
   {%- endif -%}
-  {% if (h.scheming_field_by_name(schema.dataset_fields, 'notes') or
+  {% if pkg.description %}
+  <div class="description embedded-content">
+    {{ h.render_markdown(pkg.description) }}
+  </div>    
+  {% elif (h.scheming_field_by_name(schema.dataset_fields, 'notes') or
     h.scheming_field_by_name(schema.dataset_fields, 'notes_translated')) and
     pkg.notes%}
     <div class="notes embedded-content">
@@ -21,7 +27,6 @@
 {% block package_additional_info %}
   {% snippet "scheming/package/snippets/additional_info.html",
   pkg_dict=pkg, dataset_type=dataset_type, schema=schema %}
-  {% if dataset_type == 'auto_dataset' %}
     {# <span class="metadata" data-module="compass_theme-metadata"
         data-module-id="{{pkg.id}}">
         <h3>{{ _('Metadata') }}</h3>
@@ -33,9 +38,14 @@
           </tbody>
         </table>
     </span> #}
-    <span class="stages-view" style="margin: 0 auto;" data-module="productops-render_stages"
-          data-module-id="{{pkg.id}}">
-      {{h.productops_empty_ingest_stages()}}
-    </span>
-    {% endif %}
+    <div class="status-info">
+      <span class="stages-view" data-module="productops-render_stages"
+            data-module-id="{{pkg.id}}">
+        {{h.productops_empty_ingest_stages()}}
+      </span>
+      <div class="status-stream">
+        {% snippet 'snippets/activity_stream.html', activity_stream=activity_stream,
+        id=pkg.id, object_type='package' %}
+      </div>
+    </div>
 {% endblock %}
