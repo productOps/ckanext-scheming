@@ -49,4 +49,17 @@
           </tbody>
         </table>
     </span> #}
+<<<<<<< HEAD
+=======
+    <div class="status-info">
+      <span class="stages-view" data-module="productops-render_stages"
+            data-module-id="{{pkg.id}}">
+        {{h.productops_empty_ingest_stages()}}
+      </span>
+      <div class="status-stream">
+        {% snippet 'snippets/activity_stream.html', activity_stream=activity_stream,
+        id=pkg.id, object_type='package' %}
+      </div>
+    </div>
+>>>>>>> b2549d67fd94b5bcbc95b0a50953d25873aa0e38
 {% endblock %}
