@@ -875,6 +875,7 @@ class TestSubfieldDatasetInvalid(object):
                 contact_address=[{"address": "anyplace"}],
             )
         except ValidationError as e:
+            print(e.error_dict)
             assert e.error_dict["citation"][0]["originator"] == ["Missing value"]
         else:
             raise AssertionError("ValidationError not raised")
@@ -940,6 +941,7 @@ class TestSubfieldResourceInvalid(object):
                 ],
             )
         except ValidationError as e:
+            print(e.error_dict)
             assert e.error_dict["resources"][0]["schedule"][0]["impact"][0
                 ].startswith("Value must be one of")
         else:

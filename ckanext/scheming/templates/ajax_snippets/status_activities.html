@@ -1,0 +1,3 @@
+{%- set activity_stream = h.get_package_activity_stream(id) -%}
+
+{% snippet 'snippets/activity_stream.html', activity_stream=activity_stream, id=id, object_type='package' %}
