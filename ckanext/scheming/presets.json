@@ -56,7 +56,7 @@
       "values": {
         "validators": "ignore_missing unicode_safe remove_whitespace",
         "form_snippet": "organization_upload.html",
-        "form_placeholder": "http://example.com/my-data.csv"
+        "form_placeholder": "http://example.com/my-data.csv3"
       }
     },
     {
